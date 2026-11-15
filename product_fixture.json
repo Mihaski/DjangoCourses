@@ -1,0 +1,41 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "product_name": "apple",
+        "product_describe": "red or green fruit",
+        "product_picture": "",
+        "product_category": "fruit",
+        "product_price": 123.0,
+        "created_at": "1870-01-01",
+        "updated_at": "1871-01-01"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "product_name": "orange",
+        "product_describe": "orange color fruit",
+        "product_picture": "",
+        "product_category": "fruit",
+        "product_price": 321.0,
+        "created_at": "1871-01-01",
+        "updated_at": "1872-01-01"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "product_name": "corn",
+        "product_describe": "yelow vegetable",
+        "product_picture": "",
+        "product_category": "vegeyable",
+        "product_price": 567.1,
+        "created_at": "1873-01-01",
+        "updated_at": "1874-01-01"
+    }
+}
+]

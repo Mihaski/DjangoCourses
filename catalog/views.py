@@ -1,10 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from catalog.models import Product, Contact
+
 
 # Create your views here.
 
 def home(request):
+    latest_products = Product.objects.order_by('-created_at')[:5]
+    print(latest_products)
+
     return render(request, 'catalog/home.html')
 
 
@@ -12,5 +17,7 @@ def contacts(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         return HttpResponse(f"спасибо, {name}! Сообщение получено.")
+
+    return HttpResponse(f'{Contact.objects.get(id=1)}')
 
     return render(request, 'catalog/contacts.html')
