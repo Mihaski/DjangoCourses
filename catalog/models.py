@@ -32,3 +32,18 @@ class Category(models.Model):
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
         ordering = ['category_name']
+
+
+class Contact(models.Model):
+    contact_name = models.CharField(max_length=150, verbose_name='Название контакта')
+    country = models.CharField(max_length=50, verbose_name='Название страны')
+    NNN = models.CharField(max_length=150, verbose_name='ИНН')  # пока не понятно что это значит
+    address = models.CharField(max_length=150, verbose_name='Адрес')
+
+    def __str__(self):
+        return f'{self.contact_name}'
+
+    class Meta:
+        verbose_name = 'контакт'
+        verbose_name_plural = 'контакты'
+        ordering = ['contact_name']
