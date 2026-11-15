@@ -1,0 +1,18 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "category_name": "fruit",
+        "category_describe": "all types of fruit"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "category_name": "vegetable",
+        "category_describe": "all types of vegetable"
+    }
+}
+]
