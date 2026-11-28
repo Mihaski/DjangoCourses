@@ -10,7 +10,7 @@ def home(request):
     latest_products = Product.objects.order_by('-created_at')[:5]
     print(latest_products)
 
-    return render(request, 'catalog/home.html')
+    return render(request, 'catalog/home.html', {'products': latest_products})
 
 
 def contacts(request):
@@ -21,3 +21,7 @@ def contacts(request):
     return HttpResponse(f'{Contact.objects.get(id=1)}')
 
     return render(request, 'catalog/contacts.html')
+
+def product_detail(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'catalog/product_detail.html', {'product': product})
