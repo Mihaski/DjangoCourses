@@ -4,63 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ product.product_name }}</title>
+    <title>{{ product.product_name }} | Каталог</title>
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5f6fa;
+            color: #343a40;
+        }
+
+        .product-card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .product-image-wrapper {
+            min-height: 400px;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+        }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 430px;
+            object-fit: contain;
+        }
+
+        .product-info {
+            padding: 35px;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #198754;
+            margin: 25px 0;
+        }
+
+        .product-description {
+            color: #6c757d;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .product-meta {
+            border-top: 1px solid #e9ecef;
+            margin-top: 25px;
+            padding-top: 20px;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .category-badge {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 20px;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container mt-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/">
+            Каталог товаров
+        </a>
+    </div>
+</nav>
 
-    <div class="card shadow-sm">
+<div class="container py-5">
 
-        {% if product.product_picture %}
-        <img src="{{ product.product_picture.url }}"
-             class="card-img-top"
-             alt="{{ product.product_name }}"
-             style="max-height: 400px; object-fit: contain;">
-        {% endif %}
+    <div class="mb-4">
+        <a href="/" class="text-decoration-none text-secondary">
+            ← Вернуться в каталог
+        </a>
+    </div>
 
-        <div class="card-body">
+    <div class="card product-card shadow-sm">
+        <div class="row g-0">
 
-            <h1 class="card-title mb-4">
-                {{ product.product_name }}
-            </h1>
+            <!-- Изображение товара -->
+            <div class="col-lg-6">
+                <div class="product-image-wrapper">
 
-            <p>
-                <strong>Описание:</strong>
-                {{ product.product_describe }}
-            </p>
+                    {% if product.product_picture %}
+                        <img
+                            src="{{ product.product_picture.url }}"
+                            class="product-image"
+                            alt="{{ product.product_name }}"
+                        >
+                    {% else %}
+                        <div class="text-center text-secondary">
+                            <div class="display-1">📦</div>
+                            <p>Изображение отсутствует</p>
+                        </div>
+                    {% endif %}
 
-            <p>
-                <strong>Категория:</strong>
-                {{ product.product_category.category_name }}
-            </p>
+                </div>
+            </div>
 
-            <p>
-                <strong>Цена:</strong>
-                {{ product.product_price }} ₽
-            </p>
+            <!-- Информация о товаре -->
+            <div class="col-lg-6">
+                <div class="product-info">
 
-            <p>
-                <strong>Дата создания:</strong>
-                {{ product.created_at }}
-            </p>
+                    <span class="category-badge">
+                        {{ product.product_category.category_name }}
+                    </span>
 
-            <p>
-                <strong>Дата изменения:</strong>
-                {{ product.updated_at }}
-            </p>
+                    <h1 class="product-title mt-4">
+                        {{ product.product_name }}
+                    </h1>
 
-            <a href="/" class="btn btn-secondary mt-3">
-                Назад
-            </a>
+                    <h2 class="product-price">
+                        {{ product.product_price|floatformat:2 }} ₽
+                    </h2>
+
+                    <hr>
+
+                    <h5 class="fw-bold mb-3">Описание товара</h5>
+
+                    <p class="product-description">
+                        {{ product.product_describe|default:"Описание товара отсутствует." }}
+                    </p>
+
+                    <div class="product-meta">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Дата создания:</span>
+                            <span class="text-dark">
+                                {{ product.created_at|date:"d.m.Y" }}
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <span>Последнее изменение:</span>
+                            <span class="text-dark">
+                                {{ product.updated_at|date:"d.m.Y" }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="/" class="btn btn-dark btn-lg w-100">
+                            Вернуться к товарам
+                        </a>
+                    </div>
+
+                </div>
+            </div>
 
         </div>
     </div>
 
 </div>
+
+<script src="/static/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
