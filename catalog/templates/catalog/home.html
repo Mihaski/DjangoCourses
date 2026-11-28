@@ -1,29 +1,15 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Skystore</title>
+{% extends 'catalog/base.html' %}
 
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block title %}Главная | Skystore{% endblock %}
 
-<body>
-
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 me-md-auto fw-normal">Skystore</h5>
-
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-    </nav>
-</div>
+{% block content %}
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Skystore</h1>
+
     <p class="lead">
-        Skystore — это отличный вариант хранения ваших плагинов и примеров кода,
-        которые вы бы хотели продать.
+        Skystore — это отличный вариант хранения ваших плагинов
+        и примеров кода, которые вы бы хотели продать.
     </p>
 </div>
 
@@ -32,98 +18,57 @@
 
         {% for product in products %}
 
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 shadow-sm">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
 
-                    <div class="card-header">
-                        <h4 class="my-0 fw-normal">
-                            {{ product.product_name }}
-                        </h4>
-                    </div>
+                <div class="card-header">
+                    <h4 class="my-0 fw-normal">
+                        {{ product.product_name }}
+                    </h4>
+                </div>
 
-                    <div class="card-body d-flex flex-column">
+                <div class="card-body d-flex flex-column">
 
-                        {% if product.product_picture %}
-                            <img
-                                src="{{ product.product_picture.url }}"
-                                class="img-fluid mb-3"
-                                alt="{{ product.product_name }}"
-                                style="height: 200px; object-fit: contain;"
-                            >
-                        {% endif %}
+                    {% if product.product_picture %}
+                    <img
+                        src="{{ product.product_picture }}"
+                        class="img-fluid mb-3"
+                        alt="{{ product.product_name }}"
+                        style="height: 200px; object-fit: contain;"
+                    >
+                    {% endif %}
 
-                        <h3 class="card-title">
-                            {{ product.product_price }} ₽
-                        </h3>
+                    <h3 class="card-title">
+                        {{ product.product_price }} ₽
+                    </h3>
 
-                        <p class="text-muted">
-                            {{ product.product_describe|truncatechars:100 }}
-                        </p>
+                    <p class="text-muted">
+                        {{ product.product_describe|truncatechars:100 }}
+                    </p>
 
-                        <p>
-                            Категория:
-                            {{ product.product_category.category_name }}
-                        </p>
+                    <p>
+                        Категория:
+                        {{ product.product_category.category_name }}
+                    </p>
 
-                        <a href="/catalog/product_detail/{{ product.pk }}/"
-                           class="btn btn-outline-primary mt-auto">
-                            Подробнее
-                        </a>
+                    <a href="/catalog/product_detail/{{ product.pk }}/"
+                       class="btn btn-outline-primary mt-auto">
+                        Подробнее
+                    </a>
 
-                    </div>
                 </div>
             </div>
+        </div>
 
         {% empty %}
 
-            <div class="col-12">
-                <p class="text-muted">
-                    Пока товаров нет.
-                </p>
-            </div>
+        <div class="col-12">
+            <p class="text-muted">Пока товаров нет.</p>
+        </div>
 
         {% endfor %}
 
     </div>
-
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-
-            <div class="col-12 col-md">
-                SkyStore
-                <small class="d-block mb-3 text-muted">&copy; 2023</small>
-            </div>
-
-            <div class="col-6 col-md">
-                <h5>Категории</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Рассылки</a></li>
-                    <li><a class="text-muted" href="#">Телеграм боты</a></li>
-                    <li><a class="text-muted" href="#">Полезные утилиты</a></li>
-                    <li><a class="text-muted" href="#">Веб-приложения</a></li>
-                    <li><a class="text-muted" href="#">Микросервисы</a></li>
-                </ul>
-            </div>
-
-            <div class="col-6 col-md">
-                <h5>Дополнительно</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Мы пишем</a></li>
-                </ul>
-            </div>
-
-            <div class="col-6 col-md">
-                <h5>О нас</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="/contacts/">Контакты</a></li>
-                </ul>
-            </div>
-
-        </div>
-    </footer>
 </div>
 
-<script src="/static/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
+{% endblock %}
